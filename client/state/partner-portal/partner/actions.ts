@@ -14,7 +14,7 @@ import {
 	JETPACK_PARTNER_PORTAL_PARTNER_REQUEST_SUCCESS,
 } from 'calypso/state/action-types';
 import { ReduxDispatch } from 'calypso/state/redux-store';
-import { isFetchingPartner } from 'calypso/state/partner-portal/selectors';
+import { isFetchingPartner } from 'calypso/state/partner-portal/partner/selectors';
 import wpcom from 'calypso/lib/wp';
 import { APIError, Partner } from 'calypso/state/partner-portal';
 

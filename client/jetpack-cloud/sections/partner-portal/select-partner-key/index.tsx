@@ -13,12 +13,12 @@ import get from 'lodash/get';
  * Internal dependencies
  */
 import { PartnerKey } from 'calypso/state/partner-portal';
-import { setActivePartnerKey } from 'calypso/state/partner-portal/actions';
+import { setActivePartnerKey } from 'calypso/state/partner-portal/partner/actions';
 import {
 	isFetchingPartner,
 	getCurrentPartner,
 	hasActivePartnerKey,
-} from 'calypso/state/partner-portal/selectors';
+} from 'calypso/state/partner-portal/partner/selectors';
 import QueryJetpackPartnerPortalPartner from 'calypso/components/data/query-jetpack-partner-portal-partner';
 import Main from 'calypso/components/main';
 import Spinner from 'calypso/components/spinner';
