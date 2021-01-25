@@ -2,6 +2,7 @@
  * External dependencies
  */
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { useTranslate } from 'i18n-calypso';
 
 /**
@@ -11,56 +12,26 @@ import Main from 'calypso/components/main';
 import CardHeading from 'calypso/components/card-heading';
 import DocumentHead from 'calypso/components/data/document-head';
 import LicenseListItem from 'calypso/jetpack-cloud/sections/partner-portal/license-list-item';
-import LicensePreview from 'calypso/jetpack-cloud/sections/partner-portal/license-preview';
+import LicensePreview, {
+	LicensePreviewPlaceholder,
+} from 'calypso/jetpack-cloud/sections/partner-portal/license-preview';
+import QueryJetpackPartnerPortalLicenses from 'calypso/components/data/query-jetpack-partner-portal-licenses';
+import {
+	getLicenses,
+	hasFetchedLicenses,
+	isFetchingLicenses,
+} from 'calypso/state/partner-portal/licenses/selectors';
 
 export default function LicenseList() {
 	const translate = useTranslate();
-
-	const data = [
-		{
-			licenseKey: 'jetpack-security-daily_AcNAyEhPaSXeFVgRj0gZkgn0Z',
-			domain: 'yetanothersite.net',
-			product: 'Jetpack Security Daily',
-			issuedOn: '2020-11-26 18:24:52',
-			attachedOn: '2020-11-27 18:24:52',
-			revokedOn: '',
-			username: 'ianramosc',
-			blogId: 883882032,
-		},
-		{
-			licenseKey: 'jetpack-backup-daily_AcNAyEhPaSXeFVgRj0gZkgn0Z',
-			domain: '',
-			product: 'Jetpack Backup Daily',
-			issuedOn: '2020-11-26 18:24:52',
-			attachedOn: '',
-			revokedOn: '',
-			username: 'ianramosc',
-			blogId: 883882032,
-		},
-		{
-			licenseKey: 'jetpack-security-realtime_AcNAyEhPaSXeFVgRj0gZkgn0Z',
-			domain: 'mygroovysite.co.uk',
-			product: 'Jetpack Security Real-time',
-			issuedOn: '2020-11-24 18:24:52',
-			attachedOn: '2020-11-25 18:24:52',
-			revokedOn: '',
-			username: 'ianramosc',
-			blogId: 883882032,
-		},
-		{
-			licenseKey: 'security-daily_AcNAyEhPaSXeFVgRj0gZkgn0Z',
-			domain: 'mylicenselesssite.com',
-			product: 'Security Daily',
-			issuedOn: '2020-11-24 18:24:52',
-			attachedOn: '2020-11-25 18:24:52',
-			revokedOn: '2020-11-25 18:24:52',
-			username: 'ianramosc',
-			blogId: 883882032,
-		},
-	];
+	const hasFetched = useSelector( hasFetchedLicenses );
+	const isFetching = useSelector( isFetchingLicenses );
+	const licenses = useSelector( getLicenses );
 
 	return (
 		<Main wideLayout={ true } className="license-list">
+			<QueryJetpackPartnerPortalLicenses />
+
 			<DocumentHead title={ translate( 'Licenses' ) } />
 
 			<CardHeading size={ 36 }>{ translate( 'Licenses' ) }</CardHeading>
@@ -74,19 +45,29 @@ export default function LicenseList() {
 				<div>{ /* Intentionally empty header. */ }</div>
 			</LicenseListItem>
 
-			{ data.map( ( license ) => (
-				<LicensePreview
-					key={ license.licenseKey }
-					licenseKey={ license.licenseKey }
-					domain={ license.domain }
-					product={ license.product }
-					issuedOn={ license.issuedOn }
-					attachedOn={ license.attachedOn }
-					revokedOn={ license.revokedOn }
-					username={ license.username }
-					blogId={ license.blogId }
-				/>
-			) ) }
+			{ ! hasFetched && isFetching && (
+				<>
+					<LicensePreviewPlaceholder />
+					<LicensePreviewPlaceholder />
+					<LicensePreviewPlaceholder />
+				</>
+			) }
+
+			{ hasFetched &&
+				licenses &&
+				licenses.map( ( license ) => (
+					<LicensePreview
+						key={ license.licenseKey }
+						licenseKey={ license.licenseKey }
+						domain={ license.domain }
+						product={ license.product }
+						issuedAt={ license.issuedAt }
+						attachedAt={ license.attachedAt }
+						revokedAt={ license.revokedAt }
+						username={ license.username }
+						blogId={ license.blogId }
+					/>
+				) ) }
 		</Main>
 	);
 }

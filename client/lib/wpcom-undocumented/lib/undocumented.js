@@ -2618,4 +2618,62 @@ Undocumented.prototype.getJetpackPartnerPortalPartner = function () {
 	} );
 };
 
+/**
+ * Request Partner Portal licenses.
+ *
+ * @returns {Promise} A promise
+ */
+Undocumented.prototype.getJetpackPartnerPortalLicenses = function () {
+	return new Promise( ( resolve ) => {
+		setTimeout( () => {
+			resolve( [
+				{
+					id: 1,
+					license_key: 'jetpack-security-daily_AcNAyEhPaSXeFVgRj0gZkgn0Z',
+					issued_at: '2020-11-26 15:24:02',
+					attached_at: '2021-11-26 15:24:08',
+					revoked_at: '',
+					domain: 'yetanothersite.net',
+					product: 'Jetpack Security Daily',
+					username: 'ianramosc',
+					blog_id: 883882032,
+				},
+				{
+					id: 2,
+					license_key: 'jetpack-backup-daily_AcNAyEhPaSXeFVgRj0gZkgn0Z',
+					issued_at: '2021-11-25 15:24:08',
+					attached_at: '',
+					revoked_at: '',
+					domain: '',
+					product: 'Jetpack Backup Daily',
+					username: 'ianramosc',
+					blog_id: 883882032,
+				},
+				{
+					id: 3,
+					license_key: 'jetpack-security-realtime_AcNAyEhPaSXeFVgRj0gZkgn0Z',
+					issued_at: '2021-11-23 15:24:08',
+					attached_at: '2021-11-23 15:25:08',
+					revoked_at: '',
+					domain: 'mygroovysite.co.uk',
+					product: 'Jetpack Security Real-time',
+					username: 'ianramosc',
+					blog_id: 883882032,
+				},
+				{
+					id: 4,
+					license_key: 'jetpack-anti-spam_AcNAyEhPaSXeFVgRj0gZkgn0Z',
+					issued_at: '2021-01-21 15:24:08',
+					attached_at: '2021-11-21 15:24:18',
+					revoked_at: '2021-01-22 15:24:33',
+					domain: 'mylicenselesssite.com',
+					product: 'Jetpack Anti-Spam',
+					username: 'ianramosc',
+					blog_id: 883882032,
+				},
+			] );
+		}, 1000 );
+	} );
+};
+
 export default Undocumented;

@@ -18,17 +18,40 @@ export interface Partner {
 	keys: PartnerKey[];
 }
 
-export interface PartnerState {
+export interface PartnerStore {
 	isFetching: boolean;
 	activePartnerKey: number;
 	current: Partner | null;
 	error: string;
 }
 
-export interface PartnerPortalState {
-	partner: PartnerState;
+export interface License {
+	id: number;
+	licenseKey: string;
+	issuedAt: string;
+	attachedAt: string;
+	revokedAt: string;
+	domain: string;
+	product: string;
+	username: string;
+	blogId: number;
+}
+
+export interface LicensesStore {
+	hasFetched: boolean;
+	isFetching: boolean;
+	all: License[];
+	error: string;
 }
 
 export interface PartnerPortalStore {
-	partnerPortal: PartnerPortalState;
+	partner: PartnerStore;
+	licenses: LicensesStore;
+}
+
+/**
+ * Represents the entire Redux store but defines only the parts that the partner portal deals with.
+ */
+export interface PartnerPortalStore {
+	partnerPortal: PartnerPortalStore;
 }

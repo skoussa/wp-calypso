@@ -29,22 +29,22 @@ interface Props {
 	licenseKey: string;
 	domain: string;
 	product: string;
-	issuedOn: string;
-	attachedOn: string;
-	revokedOn: string;
+	issuedAt: string;
+	attachedAt: string;
+	revokedAt: string;
 }
 
 export default function LicensePreview( {
 	licenseKey,
 	domain,
 	product,
-	issuedOn,
-	attachedOn,
-	revokedOn,
+	issuedAt,
+	attachedAt,
+	revokedAt,
 }: Props ) {
 	const translate = useTranslate();
 	const [ isOpen, setOpen ] = useState( false );
-	const licenseState = getLicenseState( attachedOn, revokedOn );
+	const licenseState = getLicenseState( attachedAt, revokedAt );
 	const showDomain = domain && [ STATE_ATTACHED, STATE_REVOKED ].indexOf( licenseState ) !== -1;
 
 	const open = useCallback( () => {
@@ -93,14 +93,14 @@ export default function LicensePreview( {
 				<div>
 					<div className="license-preview__label">{ translate( 'Issued on:' ) }</div>
 
-					<FormattedDate date={ issuedOn } format="YYYY-MM-DD" />
+					<FormattedDate date={ issuedAt } format="YYYY-MM-DD" />
 				</div>
 
 				<div>
 					<div className="license-preview__label">{ translate( 'Attached on:' ) }</div>
 
 					{ licenseState === STATE_ATTACHED && (
-						<FormattedDate date={ attachedOn } format="YYYY-MM-DD" />
+						<FormattedDate date={ attachedAt } format="YYYY-MM-DD" />
 					) }
 
 					{ licenseState !== STATE_ATTACHED && (
@@ -112,7 +112,7 @@ export default function LicensePreview( {
 					<div className="license-preview__label">{ translate( 'Revoked on:' ) }</div>
 
 					{ licenseState === STATE_REVOKED && (
-						<FormattedDate date={ revokedOn } format="YYYY-MM-DD" />
+						<FormattedDate date={ revokedAt } format="YYYY-MM-DD" />
 					) }
 
 					{ licenseState !== STATE_REVOKED && (
@@ -137,6 +137,44 @@ export default function LicensePreview( {
 						<Gridicon icon={ isOpen ? 'chevron-up' : 'chevron-down' } />
 					</Button>
 				</div>
+			</LicenseListItem>
+		</div>
+	);
+}
+
+export function LicensePreviewPlaceholder() {
+	const translate = useTranslate();
+
+	return (
+		<div className="license-preview license-preview--placeholder">
+			<LicenseListItem className="license-preview__card">
+				<div>
+					<h3 className="license-preview__domain" />
+
+					<div className="license-preview__product" />
+				</div>
+
+				<div>
+					<div className="license-preview__label">{ translate( 'Issued on:' ) }</div>
+
+					<div />
+				</div>
+
+				<div>
+					<div className="license-preview__label">{ translate( 'Attached on:' ) }</div>
+
+					<div />
+				</div>
+
+				<div>
+					<div className="license-preview__label">{ translate( 'Revoked on:' ) }</div>
+
+					<div />
+				</div>
+
+				<div></div>
+
+				<div></div>
 			</LicenseListItem>
 		</div>
 	);
