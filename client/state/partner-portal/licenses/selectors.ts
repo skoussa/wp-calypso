@@ -21,3 +21,7 @@ export function isFetchingLicenses( state: PartnerPortalStore ): boolean {
 export function getLicenses( state: PartnerPortalStore ): License[] {
 	return state.partnerPortal.licenses.all;
 }
+
+export function getLicensesError( state: PartnerPortalStore ): string {
+	return state.partnerPortal.licenses.error;
+}

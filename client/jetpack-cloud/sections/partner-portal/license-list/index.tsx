@@ -9,6 +9,7 @@ import { useTranslate } from 'i18n-calypso';
  * Internal dependencies
  */
 import Main from 'calypso/components/main';
+import { Card } from '@automattic/components';
 import CardHeading from 'calypso/components/card-heading';
 import DocumentHead from 'calypso/components/data/document-head';
 import LicenseListItem from 'calypso/jetpack-cloud/sections/partner-portal/license-list-item';
@@ -17,16 +18,23 @@ import LicensePreview, {
 } from 'calypso/jetpack-cloud/sections/partner-portal/license-preview';
 import QueryJetpackPartnerPortalLicenses from 'calypso/components/data/query-jetpack-partner-portal-licenses';
 import {
-	getLicenses,
 	hasFetchedLicenses,
 	isFetchingLicenses,
+	getLicenses,
+	getLicensesError,
 } from 'calypso/state/partner-portal/licenses/selectors';
+
+/**
+ * Style dependencies
+ */
+import './style.scss';
 
 export default function LicenseList() {
 	const translate = useTranslate();
 	const hasFetched = useSelector( hasFetchedLicenses );
 	const isFetching = useSelector( isFetchingLicenses );
 	const licenses = useSelector( getLicenses );
+	const error = useSelector( getLicensesError );
 
 	return (
 		<Main wideLayout={ true } className="license-list">
@@ -68,6 +76,18 @@ export default function LicenseList() {
 						blogId={ license.blogId }
 					/>
 				) ) }
+
+			{ ! error && hasFetched && licenses.length === 0 && (
+				<Card className="license-list__message" compact>
+					{ translate( 'No licenses found.' ) }
+				</Card>
+			) }
+
+			{ error && (
+				<Card className="license-list__message" compact>
+					{ translate( 'Failed to retrieve your licenses. Please try again later.' ) }
+				</Card>
+			) }
 		</Main>
 	);
 }

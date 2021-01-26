@@ -14,7 +14,7 @@ import {
 	JETPACK_PARTNER_PORTAL_LICENSES_REQUEST_SUCCESS,
 } from 'calypso/state/action-types';
 import { ReduxDispatch } from 'calypso/state/redux-store';
-import { APIError, License } from 'calypso/state/partner-portal';
+import { License } from 'calypso/state/partner-portal';
 import { makeCancellable } from 'calypso/utils';
 import wpcom from 'calypso/lib/wp';
 
@@ -44,9 +44,7 @@ const doFetchLicenses = debounce( ( dispatch: ReduxDispatch ): void => {
 		fetchLicensesPromise.cancel();
 	}
 
-	fetchLicensesPromise = makeCancellable(
-		wpcom.undocumented().getJetpackPartnerPortalLicenses() as Promise< License[] >
-	);
+	fetchLicensesPromise = makeCancellable( wpcom.undocumented().getJetpackPartnerPortalLicenses() );
 
 	fetchLicensesPromise.promise.then(
 		( licenses: License[] ) => {

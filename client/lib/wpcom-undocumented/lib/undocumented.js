@@ -2624,6 +2624,10 @@ Undocumented.prototype.getJetpackPartnerPortalPartner = function () {
  * @returns {Promise} A promise
  */
 Undocumented.prototype.getJetpackPartnerPortalLicenses = function () {
+	return this.wpcom.req.get( {
+		apiNamespace: 'wpcom/v2',
+		path: '/jetpack-licensing/fake-endpoint',
+	} ).catch( () => [] );
 	return new Promise( ( resolve ) => {
 		setTimeout( () => {
 			resolve( [
