@@ -13,14 +13,17 @@
 		"email": "wp-desktop@automattic.com"
 	},
 	"homepage": "https://desktop.wordpress.com/",
-	"main": "build/desktop.js",
+	"main": "build/index.js",
 	"keywords": [
 		"desktop",
 		"wordpress",
 		"wordpress.com"
 	],
 	"scripts": {
-		"build": "npx electron-builder ${ELECTRON_BUILDER_ARGS} build --publish never",
+		"dev": "electron app/index.js",
+		"build": "yarn run build:main && yarn run build:app",
+		"build:app": "npx electron-builder ${ELECTRON_BUILDER_ARGS} build --publish never",
+		"build:main": "webpack --display errors-only",
 		"ci:github:add-review": "node bin/github/add-review.js",
 		"ci:github:dismiss-review": "node bin/github/dismiss-review.js"
 	},
