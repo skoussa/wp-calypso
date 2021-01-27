@@ -94,6 +94,7 @@ function getWebpackConfig(
 			chunkLoadingGlobal: outputChunkLoadingGlobal,
 		},
 		optimization: {
+			concatenateModules: false,
 			minimize: ! isDevelopment,
 			minimizer: Minify( {
 				parallel: workerCount,
