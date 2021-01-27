@@ -272,7 +272,6 @@
 		}
 	}
 
-	// assumption: is-popular === is-primary
 	&.is-primary,
 	&.is-popular {
 		background: $onboarding-accent-blue;
@@ -300,65 +299,3 @@
 		width: 100%;
 	}
 }
-
-// .plan-item__select-button.components-button {
-// 	height: 40px;
-
-// 	&:disabled {
-// 		text-decoration: line-through;
-// 		opacity: 0.5;
-// 	}
-
-// 	&:not( .is-primary ) {
-// 		color: var( --studio-gray-90 );
-
-// 		&:hover {
-// 			color: inherit;
-// 		}
-// 	}
-// }
-
-// // it's OK to use $onboarding-accent-blue variable here because the full-width mode is only used there
-// .plan-item__select-button.components-button.full-width {
-// 	width: 100%;
-// 	justify-content: center;
-// 	font-size: $font-body-small;
-// 	// stylelint-disable-next-line scales/radii
-// 	border-radius: 4px;
-// 	margin-top: 15px;
-
-// 	// &.is-popular {
-// 	// 	background: $onboarding-accent-blue;
-// 	// }
-
-// 	&:not( .is-popular ) {
-// 		border: 1px solid var( --studio-gray-5 );
-// 	}
-
-// 	&.is-selected {
-// 		// popular selected items don't need a blue border
-// 		&:not( .is-popular ) {
-// 			border: 1px solid $onboarding-accent-blue;
-// 			color: $onboarding-accent-blue;
-// 			background: #fafcfe;
-// 		}
-
-// 		svg {
-// 			fill: currentColor;
-// 			stroke: currentColor;
-// 			// makes it look more vertically centered
-// 			transform: translateY( -1px );
-// 			vertical-align: middle;
-// 			margin-right: 4px;
-// 		}
-// 	}
-// }
-
-// .plan-item__select-button.components-button.is-primary:not( .full-width ) {
-// 	border: 0;
-
-// 	svg {
-// 		margin-left: -8px;
-// 		margin-right: 10px;
-// 	}
-// }
